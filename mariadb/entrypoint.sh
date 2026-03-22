@@ -9,14 +9,14 @@ export INTERNAL_IP
 if which mariadbd-safe > /dev/null ; then
 	MARIADBD_EXECUTABLE="mariadbd"
 	MARIADB_INSTALLDB_EXECUTABLE="mariadb-install-db"
-	MARIAAB_UPGRADE_EXECUTABLE="mariadb-upgrade"
+	MARIADB_UPGRADE_EXECUTABLE="mariadb-upgrade"
 	MARIADB_ADMIN_EXECUTABLE="mariadb-admin"
 	MARIADB_EXECUTABLE="mariadb"
 
 else
 	MARIADBD_EXECUTABLE="mysqld"
 	MARIADB_INSTALLDB_EXECUTABLE="mysql_install_db"
-	MARIAAB_UPGRADE_EXECUTABLE="mysql_upgrade"
+	MARIADB_UPGRADE_EXECUTABLE="mysql_upgrade"
 	MARIADB_ADMIN_EXECUTABLE="mysqladmin"
 	MARIADB_EXECUTABLE="mysql"
 fi
@@ -67,9 +67,9 @@ if ! $MARIADB_ADMIN_EXECUTABLE ping --silent ; then
 fi
 
 # Check if an upgrade is needed
-if $MARIAAB_UPGRADE_EXECUTABLE -u container --check-if-upgrade-is-needed --silent ; then
+if $MARIADB_UPGRADE_EXECUTABLE -u container --check-if-upgrade-is-needed --silent ; then
 	echo "Running database upgrade..."
-	$MARIAAB_UPGRADE_EXECUTABLE -u container
+	$MARIADB_UPGRADE_EXECUTABLE -u container
 	echo "Database upgrade completed."
 else
 	echo "No database upgrade needed."
