@@ -31,7 +31,7 @@ RUN         dpkg --add-architecture i386 \
                 python3-pip \
                 python3-venv
 				
-# pip по умолчанию заблокирован для системного интерпретатора
+# pip по умолчанию заблокирован для системного интерпретатора.
 RUN         pip3 install --upgrade pip \
             && pip3 install berconpy schedule --break-system-packages
 
