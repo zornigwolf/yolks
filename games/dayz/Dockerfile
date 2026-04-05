@@ -30,6 +30,10 @@ RUN         dpkg --add-architecture i386 \
                 python3 \
                 python3-pip \
                 python3-venv
+				
+# pip по умолчанию заблокирован для системного интерпретатора
+RUN         pip3 install --upgrade pip \
+            && pip3 install berconpy schedule --break-system-packages
 
 ## install rcon client (bercon)
 RUN         cd /tmp/ \
