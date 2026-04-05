@@ -1,0 +1,34 @@
+name: Build DayZ Custom Image
+
+on:
+  push:
+    paths:
+      - 'games/dayz/**' # Собирать только если изменилась папка с DayZ
+    branches:
+      - main
+
+jobs:
+  push_to_registry:
+    name: Build and push Docker image
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: ./games/dayz # Путь к твоему докерфайлу
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository_owner }}/dayz-custom:latest
