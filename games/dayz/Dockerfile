@@ -26,7 +26,10 @@ RUN         dpkg --add-architecture i386 \
                 lib32stdc++6 \
                 libcap2 \
                 libnss-wrapper \
-                tini
+                tini \
+                python3 \
+                python3-pip \
+                python3-venv
 
 ## install rcon client (bercon)
 RUN         cd /tmp/ \
